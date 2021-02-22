@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/Controller/conductorMaster.cs" Inherits="View_conductorMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 95%;
+        }
+        .auto-style2 {
+            width: 627px;
+            text-align: center;
+            border-radius: 50px;
+        }
+        .auto-style3 {
+            width: 100%;
+        }
+        </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table class="auto-style3">
+            <tr>
+                <td>
+                    <asp:Image ID="Portada" runat="server" ImageUrl="~/Imagenes/Portada.png" />
+                </td>
+            </tr>
+        </table>
+        <table class="auto-style1">
+            <tr>
+                <td class="auto-style2"><em>
+                    <asp:HyperLink ID="HL_PPConductor" runat="server" Font-Names="Segoe UI" Font-Size="12pt" ForeColor="Black" NavigateUrl="~/View/paginaPrincipal.aspx">◄ Volver al inicio</asp:HyperLink>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Names="Segoe UI" Font-Size="40pt" Text="Conductor"></asp:Label>
+                    </em></td>
+                <td rowspan="2">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            <table class="auto-style1">
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        
+        </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style2">
+                    <asp:Image ID="LogL_Cliente" runat="server" ImageUrl="~/Imagenes/Mototaxi Deluxe (1).png" Width="50%" CssClass="auto-style2" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>
