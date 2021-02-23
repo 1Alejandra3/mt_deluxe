@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Logica;
+using Utilitarios;
+using Data;
 
 public partial class View_loginConductor : System.Web.UI.Page
 {
@@ -17,6 +20,9 @@ public partial class View_loginConductor : System.Web.UI.Page
         Conductor conductor = new Conductor();
         conductor.Usuario = Login_Conductor.UserName;
         conductor.Contrasena = Login_Conductor.Password;
+
+        ((Label)Login_Conductor.FindControl("LN_Mensaje")).Text = new LConductor().login(conductor);
+        //Session["user"] = null; //Variable vacia (No ha iniciado sesión)
 
         conductor = new DaoConductor().login(conductor);
         MAC conexion = new MAC();
@@ -36,17 +42,10 @@ public partial class View_loginConductor : System.Web.UI.Page
             new DaoSeguridadConductor().insertarAcceso(accesoc);
         }
 
-        if ((conductor == null) || (conductor.Sesion.Equals("inactivo")) || (conductor.Sesion.Equals("espera")))
-        {
-            ((Label)Login_Conductor.FindControl("LN_Mensaje")).Text = "Usuario o clave incorrecta";
-            Session["user"] = null; //Variable vacia (No ha iniciado sesión)
+       
+           
 
-        }
-        else
-        {
-            if (s != null)
-                Response.Redirect("conductor.aspx");
-        }
+        
     }
 
     protected void LB_Recuperacion_Contraseña_Click(object sender, EventArgs e)

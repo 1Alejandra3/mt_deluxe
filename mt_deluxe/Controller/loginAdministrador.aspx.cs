@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Utilitarios;
+using Data;
+using Logica;
 
 public partial class View_loginAdministrador : System.Web.UI.Page
 {
@@ -20,16 +23,9 @@ public partial class View_loginAdministrador : System.Web.UI.Page
 
         administrador = new DaoAdministrador().login(administrador);
 
-        if (administrador == null)
-        {
-            ((Label)Login_Administrador.FindControl("LN_Mensaje")).Text = "Usuario o Clave incorrecta";
-            Session["user"] = null; //Variable vacia (No ha iniciado sesión)
-        }
-        else
-        {
-            object s = Session["user"] = administrador; //Variable llena (Se inicio sesión)
-            if (s != null)
-                Response.Redirect("administrador.aspx");
-        }
+
+            ((Label)Login_Administrador.FindControl("LN_Mensaje")).Text = new LAdministrador().login(administrador);
+            //Session["user"] = null; //Variable vacia (No ha iniciado sesión)
+        
     }
 }

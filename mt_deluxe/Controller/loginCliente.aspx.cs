@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Utilitarios;
+using Data;
+using Logica;
 
 public partial class View_loginCliente : System.Web.UI.Page
 {
@@ -19,6 +22,7 @@ public partial class View_loginCliente : System.Web.UI.Page
         cliente.Contrasena = Login_Cliente.Password;
 
         cliente = new DaoCliente().login(cliente);
+        ((Label)Login_Cliente.FindControl("LN_Mensaje")).Text = new LCliente().login(cliente);
 
         MAC conexion = new MAC();
         AccesoCliente acceso = new AccesoCliente();
@@ -38,16 +42,7 @@ public partial class View_loginCliente : System.Web.UI.Page
             new DaoSeguridadCliente().insertarAcceso(acceso);
         }
 
-        if ((cliente == null) || (cliente.Sesion.Equals("inactivo")))
-        {
-            ((Label)Login_Cliente.FindControl("LN_Mensaje")).Text = "Usuario o clave incorrecto";
-            Session["user"] = null; //Variable vacia (No ha iniciado sesión)
-        }
-        else
-        {
-            if (s != null)
-                Response.Redirect("cliente.aspx");
-        }
+        
     }
 
     protected void LB_Recuperacion_Contraseña_Click(object sender, EventArgs e)
