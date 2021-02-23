@@ -8,6 +8,7 @@ using Utilitarios;
 using Data;
 using Logica;
 
+
 public partial class View_loginAdministrador : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
