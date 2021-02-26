@@ -22,11 +22,11 @@ namespace Data
         }
 
         public DbSet<Cliente> client { get; set; }
-        public DbSet<TokenCliente> token { get; set; }
-        public DbSet<AccesoCliente> accesoClientes { get; set; }
-        public DbSet<Notificacion> notificacion { get; set; }
-        public DbSet<Destino> destino { get; set; }
-        public DbSet<MPago> pago { get; set; }
+        //public DbSet<TokenCliente> token { get; set; }
+        //public DbSet<AccesoCliente> accesoClientes { get; set; }
+        //public DbSet<Notificacion> notificacion { get; set; }
+        //public DbSet<Destino> destino { get; set; }
+        //public DbSet<MPago> pago { get; set; }
 
         //
         public DbSet<Conductor> conduc { get; set; }

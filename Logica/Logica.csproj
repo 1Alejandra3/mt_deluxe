@@ -44,6 +44,7 @@
     <Compile Include="LAdministrador.cs" />
     <Compile Include="LCliente.cs" />
     <Compile Include="LConductor.cs" />
+    <Compile Include="LRegistroCliente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

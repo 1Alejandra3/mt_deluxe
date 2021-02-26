@@ -10,22 +10,23 @@ namespace Logica
 {
     public class LCliente
     {
-        public string login(Cliente cliente)
+        public Cascaron login(Cliente cliente)
         {
-           cliente= new DaoCliente().login(cliente);
+            cliente = new DaoCliente().login(cliente);
+            Cascaron cascaron = new Cascaron();
 
-
-        if ((cliente == null) || (cliente.Sesion.Equals("inactivo")))
+            if ((cliente == null) || (cliente.Sesion.Equals("inactivo")))
             {
-                return "Usuario o clave incorrecto";
-                Session["user"] = null; //Variable vacia (No ha iniciado sesión)
+                cascaron.Mensaje = "Usuario o clave incorrecto";
+                cascaron.Url = "loginCliente.aspx";
+                //Session["user"] = null; //Variable vacia (No ha iniciado sesión)
             }
             else
             {
-                if (s != null)
-                    Response.Redirect("cliente.aspx");
+                //if (s != null)
+                cascaron.Url = "paginaPrincipal.aspx";
             }
-
+            return cascaron;
         }
     }
 }

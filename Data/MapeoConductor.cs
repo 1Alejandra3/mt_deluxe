@@ -24,16 +24,16 @@ namespace Data
         }
 
         public DbSet<Conductor> conduc { get; set; }
-        public DbSet<TokenConductor> token { get; set; }
-        public DbSet<AccesoConductor> accesoconductor { get; set; }
-        public DbSet<Estado> estado { get; set; }
+        //public DbSet<TokenConductor> token { get; set; }
+        //public DbSet<AccesoConductor> accesoconductor { get; set; }
+        //public DbSet<Estado> estado { get; set; }
 
-        //
-        public DbSet<Notificacion> notificacion { get; set; }
+        ////
+        //public DbSet<Notificacion> notificacion { get; set; }
         public DbSet<Cliente> client { get; set; }
-        public DbSet<Destino> destino { get; set; }
-        public DbSet<MPago> pago { get; set; }
-        //
+        //public DbSet<Destino> destino { get; set; }
+        //public DbSet<MPago> pago { get; set; }
+        ////
 
         protected override void OnModelCreating(DbModelBuilder builder)
         {

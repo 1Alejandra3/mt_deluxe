@@ -9,6 +9,8 @@ using System.Data;
 using Newtonsoft.Json;
 using System.Text;
 using Telegram.Bot;
+using Utilitarios;
+using Data;
 
 public partial class View_conductor : System.Web.UI.Page
 {

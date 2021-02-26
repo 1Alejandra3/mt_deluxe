@@ -26,7 +26,7 @@ namespace Data
         public DbSet<Administrador> administrador { get; set; } //Conexión bd-c#
         public DbSet<Conductor> conductor { get; set; }
         public DbSet<Cliente> cliente { get; set; }
-        public DbSet<Notificacion> notificacion { get; set; }
+        //public DbSet<Notificacion> notificacion { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder builder)

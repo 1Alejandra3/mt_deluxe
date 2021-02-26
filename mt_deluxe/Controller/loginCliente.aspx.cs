@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utilitarios;
-using Data;
+
 using Logica;
 
 public partial class View_loginCliente : System.Web.UI.Page
@@ -21,32 +21,36 @@ public partial class View_loginCliente : System.Web.UI.Page
         cliente.Usuario = Login_Cliente.UserName;
         cliente.Contrasena = Login_Cliente.Password;
 
-        cliente = new DaoCliente().login(cliente);
-        ((Label)Login_Cliente.FindControl("LN_Mensaje")).Text = new LCliente().login(cliente);
+        Cascaron cascaron = new LCliente().login(cliente);
+        ((Label)Login_Cliente.FindControl("LN_Mensaje")).Text = cascaron.Mensaje;
+        Response.Redirect(cascaron.Url);
 
-        MAC conexion = new MAC();
-        AccesoCliente acceso = new AccesoCliente();
+        //    MAC conexion = new MAC();
+        //    AccesoCliente acceso = new AccesoCliente();
 
-        object s = Session["user"] = cliente; //Variable llena (Se inicio sesión)
+        //    object s = Session["user"] = cliente; //Variable llena (Se inicio sesión)
 
-        if(s != null)
+        //    if(s != null)
+        //    {
+        //        Session["user"] = cliente;
+
+        //        acceso.FechaInicio = DateTime.Now;
+        //        acceso.Ip = conexion.ip();
+        //        acceso.Mac = conexion.mac();
+        //        acceso.Session = Session.SessionID;
+        //        acceso.IdCliente = cliente.IdCliente;
+
+        //        new DaoSeguridadCliente().insertarAcceso(acceso);
+        //    }
+
+
+    }
+
+        protected void LB_Recuperacion_Contraseña_Click(object sender, EventArgs e)
         {
-            Session["user"] = cliente;
-
-            acceso.FechaInicio = DateTime.Now;
-            acceso.Ip = conexion.ip();
-            acceso.Mac = conexion.mac();
-            acceso.Session = Session.SessionID;
-            acceso.IdCliente = cliente.IdCliente;
-
-            new DaoSeguridadCliente().insertarAcceso(acceso);
+            Response.Redirect("GenerarTokenCliente.aspx");
         }
+    
 
-        
-    }
 
-    protected void LB_Recuperacion_Contraseña_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("GenerarTokenCliente.aspx");
-    }
 }

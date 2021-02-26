@@ -50,105 +50,105 @@ namespace Data
             return new MapeoAdministrador().cliente.Where(x => x.Sesion.Contains("activo")).ToList();
         }
 
-        //Select Pago Conductor List
-        public List<Notificacion> notificacion()
-        {
-            using (var db = new MapeoConductor())
-            {
-                List<Notificacion> lista = (from n in db.notificacion
-                                            join co in db.conduc on n.IdConductor equals co.IdConductor
-                                            select new
-                                            {
-                                                n,
-                                                co.Nombre
-                                            }).ToList().Select(m => new Notificacion
-                                            {
-                                                Id = m.n.Id,
-                                                IdConductor = m.n.IdConductor,
-                                                NombreCo = m.Nombre
-                                            }).OrderBy(x => x.IdConductor).ToList();
+        ////Select Pago Conductor List
+        //public List<Notificacion> notificacion()
+        //{
+        //    using (var db = new MapeoConductor())
+        //    {
+        //        List<Notificacion> lista = (from n in db.notificacion
+        //                                    join co in db.conduc on n.IdConductor equals co.IdConductor
+        //                                    select new
+        //                                    {
+        //                                        n,
+        //                                        co.Nombre
+        //                                    }).ToList().Select(m => new Notificacion
+        //                                    {
+        //                                        Id = m.n.Id,
+        //                                        IdConductor = m.n.IdConductor,
+        //                                        NombreCo = m.Nombre
+        //                                    }).OrderBy(x => x.IdConductor).ToList();
 
-                var conductores = lista.GroupBy(x => x.IdConductor).Select(grp => grp.ToList());
+        //        var conductores = lista.GroupBy(x => x.IdConductor).Select(grp => grp.ToList());
 
-                List<Notificacion> listaCo = new List<Notificacion>();
+        //        List<Notificacion> listaCo = new List<Notificacion>();
 
-                foreach (var item in conductores)
-                {
-                    Notificacion notificacion = new Notificacion();
-                    notificacion.ListaConductores = item;
-                    notificacion.IdConductor = notificacion.ListaConductores.First().IdConductor;
-                    notificacion.NombreCo = notificacion.ListaConductores.First().NombreCo;
-                    listaCo.Add(notificacion);
-                }
+        //        foreach (var item in conductores)
+        //        {
+        //            Notificacion notificacion = new Notificacion();
+        //            notificacion.ListaConductores = item;
+        //            notificacion.IdConductor = notificacion.ListaConductores.First().IdConductor;
+        //            notificacion.NombreCo = notificacion.ListaConductores.First().NombreCo;
+        //            listaCo.Add(notificacion);
+        //        }
 
-                return listaCo;
-            }
-        }
+        //        return listaCo;
+        //    }
+        //}
 
-        //Select Comentarios Conductor
-        public List<Notificacion> mostrarCarreraConductor()
-        {
-            using (var db = new MapeoConductor())
-            {
-                return (from n in db.notificacion
-                        join cl in db.client on n.IdCliente equals cl.IdCliente
-                        join co in db.conduc on n.IdConductor equals co.IdConductor
-                        orderby n.FechaCarrera
-                        select new
-                        {
-                            n,
-                            cl.Nombrecl,
-                            co.Sesion
-                        }).ToList().Select(m => new Notificacion
-                        {
-                            Id = m.n.Id,
-                            IdCliente = m.n.IdCliente,
-                            IdDestino = m.n.IdDestino,
-                            IdUbicacion = m.n.IdUbicacion,
-                            Tarifa = m.n.Tarifa,
-                            FechaCarrera = m.n.FechaCarrera,
-                            Estado = m.n.Estado,
-                            IdConductor = m.n.IdConductor,
-                            Conductor = m.n.Conductor,
-                            ComentarioDeCliente = m.n.ComentarioDeCliente,
-                            FechaFinCarrera = m.n.FechaFinCarrera,
-                            NombreCl = m.Nombrecl,
-                            Sesion = m.Sesion
-                        }).Where(x => x.Estado.Contains("Aceptado") && x.ComentarioDeCliente != null).OrderBy(x => x.FechaCarrera).ToList();
-            }
-        }
+        ////Select Comentarios Conductor
+        //public List<Notificacion> mostrarCarreraConductor()
+        //{
+        //    using (var db = new MapeoConductor())
+        //    {
+        //        return (from n in db.notificacion
+        //                join cl in db.client on n.IdCliente equals cl.IdCliente
+        //                join co in db.conduc on n.IdConductor equals co.IdConductor
+        //                orderby n.FechaCarrera
+        //                select new
+        //                {
+        //                    n,
+        //                    cl.Nombrecl,
+        //                    co.Sesion
+        //                }).ToList().Select(m => new Notificacion
+        //                {
+        //                    Id = m.n.Id,
+        //                    IdCliente = m.n.IdCliente,
+        //                    IdDestino = m.n.IdDestino,
+        //                    IdUbicacion = m.n.IdUbicacion,
+        //                    Tarifa = m.n.Tarifa,
+        //                    FechaCarrera = m.n.FechaCarrera,
+        //                    Estado = m.n.Estado,
+        //                    IdConductor = m.n.IdConductor,
+        //                    Conductor = m.n.Conductor,
+        //                    ComentarioDeCliente = m.n.ComentarioDeCliente,
+        //                    FechaFinCarrera = m.n.FechaFinCarrera,
+        //                    NombreCl = m.Nombrecl,
+        //                    Sesion = m.Sesion
+        //                }).Where(x => x.Estado.Contains("Aceptado") && x.ComentarioDeCliente != null).OrderBy(x => x.FechaCarrera).ToList();
+        //    }
+        //}
 
-        //Select Comentarios Cliente
-        public List<Notificacion> mostrarServiciosCliente()
-        {
-            using (var db = new MapeoCliente())
-            {
-                return (from n in db.notificacion
-                        join cl in db.client on n.IdCliente equals cl.IdCliente
-                        orderby n.FechaCarrera
-                        select new
-                        {
-                            n,
-                            cl.Nombrecl,
-                            cl.Sesion
-                        }).ToList().Select(m => new Notificacion
-                        {
-                            Id = m.n.Id,
-                            IdCliente = m.n.IdCliente,
-                            IdDestino = m.n.IdDestino,
-                            IdUbicacion = m.n.IdUbicacion,
-                            Tarifa = m.n.Tarifa,
-                            FechaCarrera = m.n.FechaCarrera,
-                            Estado = m.n.Estado,
-                            IdConductor = m.n.IdConductor,
-                            Conductor = m.n.Conductor,
-                            ComentarioDeConductor = m.n.ComentarioDeConductor,
-                            FechaFinCarrera = m.n.FechaFinCarrera,
-                            NombreCl = m.Nombrecl,
-                            Sesion = m.Sesion
-                        }).Where(x => x.Estado.Contains("Aceptado") && x.ComentarioDeConductor != null).OrderBy(x => x.FechaCarrera).ToList();
-            }
-        }
+        ////Select Comentarios Cliente
+        //public List<Notificacion> mostrarServiciosCliente()
+        //{
+        //    using (var db = new MapeoCliente())
+        //    {
+        //        return (from n in db.notificacion
+        //                join cl in db.client on n.IdCliente equals cl.IdCliente
+        //                orderby n.FechaCarrera
+        //                select new
+        //                {
+        //                    n,
+        //                    cl.Nombrecl,
+        //                    cl.Sesion
+        //                }).ToList().Select(m => new Notificacion
+        //                {
+        //                    Id = m.n.Id,
+        //                    IdCliente = m.n.IdCliente,
+        //                    IdDestino = m.n.IdDestino,
+        //                    IdUbicacion = m.n.IdUbicacion,
+        //                    Tarifa = m.n.Tarifa,
+        //                    FechaCarrera = m.n.FechaCarrera,
+        //                    Estado = m.n.Estado,
+        //                    IdConductor = m.n.IdConductor,
+        //                    Conductor = m.n.Conductor,
+        //                    ComentarioDeConductor = m.n.ComentarioDeConductor,
+        //                    FechaFinCarrera = m.n.FechaFinCarrera,
+        //                    NombreCl = m.Nombrecl,
+        //                    Sesion = m.Sesion
+        //                }).Where(x => x.Estado.Contains("Aceptado") && x.ComentarioDeConductor != null).OrderBy(x => x.FechaCarrera).ToList();
+        //    }
+        //}
 
         //Update Estado
         public void sesionConductor(Conductor conductor)
@@ -199,78 +199,78 @@ namespace Data
             }
         }
 
-        //Select Id COnductor Notificacion
-        public Notificacion buscaridConductorN(double idConductor)
-        {
-            return new MapeoConductor().notificacion.Where(x => x.IdConductor == idConductor).FirstOrDefault();
-        }
+        ////Select Id COnductor Notificacion
+        //public Notificacion buscaridConductorN(double idConductor)
+        //{
+        //    return new MapeoConductor().notificacion.Where(x => x.IdConductor == idConductor).FirstOrDefault();
+        //}
 
 
-        //Select Id Conductor Conductor
-        public Conductor buscaridConductorCo(double idConductor)
-        {
-            return new MapeoConductor().conduc.Where(x => x.IdConductor == idConductor).FirstOrDefault();
-        }
+        ////Select Id Conductor Conductor
+        //public Conductor buscaridConductorCo(double idConductor)
+        //{
+        //    return new MapeoConductor().conduc.Where(x => x.IdConductor == idConductor).FirstOrDefault();
+        //}
 
-        //Select Id Cliente Notificacion
-        public Notificacion buscaridClienteN(double idCliente)
-        {
-            return new MapeoConductor().notificacion.Where(x => x.IdCliente == idCliente).FirstOrDefault();
-        }
+        ////Select Id Cliente Notificacion
+        //public Notificacion buscaridClienteN(double idCliente)
+        //{
+        //    return new MapeoConductor().notificacion.Where(x => x.IdCliente == idCliente).FirstOrDefault();
+        //}
 
-        //Select Id Cliente cliente
-        public Cliente buscaridClienteC(double idCliente)
-        {
-            return new MapeoConductor().client.Where(x => x.IdCliente == idCliente).FirstOrDefault();
-        }
+        ////Select Id Cliente cliente
+        //public Cliente buscaridClienteC(double idCliente)
+        //{
+        //    return new MapeoConductor().client.Where(x => x.IdCliente == idCliente).FirstOrDefault();
+        //}
 
-        public void sancionCliente(Cliente cliente)
-        {
-            using (var db = new MapeoCliente())
-            {
-                Cliente sancion = db.client.Where(x => x.IdCliente == cliente.IdCliente).First();
-                sancion.Sesion = cliente.Sesion;
-                sancion.FechaSancion = cliente.FechaSancion;
+        //public void sancionCliente(Cliente cliente)
+        //{
+        //    using (var db = new MapeoCliente())
+        //    {
+        //        Cliente sancion = db.client.Where(x => x.IdCliente == cliente.IdCliente).First();
+        //        sancion.Sesion = cliente.Sesion;
+        //        sancion.FechaSancion = cliente.FechaSancion;
 
-                db.client.Attach(sancion);
+        //        db.client.Attach(sancion);
 
-                var entry = db.Entry(sancion);
-                entry.State = EntityState.Modified;
-                db.SaveChanges();
-            }
-        }
+        //        var entry = db.Entry(sancion);
+        //        entry.State = EntityState.Modified;
+        //        db.SaveChanges();
+        //    }
+        //}
 
-        //Select Desprendible
-        public Notificacion generarDesprendible(int idCo)
-        {
-            using (var db = new MapeoAdministrador())
-            {
-                return (from n in db.notificacion
-                        join co in db.conductor on n.IdConductor equals co.IdConductor
-                        select new
-                        {
-                            n,
-                            co.Nombre,
-                            co.Apellido,
-                            co.Cedula,
-                            co.Placa
-                        }).ToList().Select(m => new Notificacion
-                        {
-                            Id = m.n.Id,
-                            IdConductor = m.n.IdConductor,
-                            Tarifa = m.n.Tarifa,
-                            NombreCo = m.Nombre,
-                            ApellidoCo = m.Apellido,
-                            Cedula = m.Cedula,
-                            Placa = m.Placa
-                        }).Where(x => x.IdConductor == idCo).FirstOrDefault();
-            }
-        }
+        ////Select Desprendible
+        //public Notificacion generarDesprendible(int idCo)
+        //{
+        //    using (var db = new MapeoAdministrador())
+        //    {
+        //        return (from n in db.notificacion
+        //                join co in db.conductor on n.IdConductor equals co.IdConductor
+        //                select new
+        //                {
+        //                    n,
+        //                    co.Nombre,
+        //                    co.Apellido,
+        //                    co.Cedula,
+        //                    co.Placa
+        //                }).ToList().Select(m => new Notificacion
+        //                {
+        //                    Id = m.n.Id,
+        //                    IdConductor = m.n.IdConductor,
+        //                    Tarifa = m.n.Tarifa,
+        //                    NombreCo = m.Nombre,
+        //                    ApellidoCo = m.Apellido,
+        //                    Cedula = m.Cedula,
+        //                    Placa = m.Placa
+        //                }).Where(x => x.IdConductor == idCo).FirstOrDefault();
+        //    }
+        //}
 
-        //Calcular Ganancias (Reporte)
-        public double ganancias(int idConductor)
-        {
-            return new MapeoConductor().notificacion.Where(x => x.IdConductor == idConductor).Sum(x => x.Tarifa);
-        }
+        ////Calcular Ganancias (Reporte)
+        //public double ganancias(int idConductor)
+        //{
+        //    return new MapeoConductor().notificacion.Where(x => x.IdConductor == idConductor).Sum(x => x.Tarifa);
+        //}
     }
 }

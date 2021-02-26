@@ -8,6 +8,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Utilitarios;
+using Data;
 
 public partial class View_cliente : System.Web.UI.Page
 {
